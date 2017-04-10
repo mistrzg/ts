@@ -8,6 +8,15 @@ classdef q
     end
     
     methods
+        function result = mtimes(obj1,obj2)
+           m_union = [1 0 0; 0 1 0; 0 0 1];
+           S_e = [ 0 -obj1.e(3) obj1.e(2); obj1.e(3) 0 -obj1.e(1); -obj1.e(2) obj1.e(1) 0];
+           product1 = [obj1.w  -1*obj1.e.'; obj1.e obj1.w*m_union + S_e];
+           product2 = [obj2.w;obj2.e];
+            
+           result = product1 * product2;
+        end
+        
         function r_out = ConvertToR(obj)
             r_matrix = r;
             
