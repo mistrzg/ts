@@ -3,26 +3,18 @@ classdef r
     %   Detailed explanation goes here
     
     properties
-        r11 = 1;
-        r12 = 0;
-        r13 = 0;
-        
-        r21 = 0;
-        r22 = 1;
-        r23 = 0;
-        
-        r31 = 0;
-        r32 = 0;
-        r33 = 1;
+        body = [ 1 0 0; 0 1 0; 0 0 1]
     end
     
     methods
         function quat = ConvertToQ(obj)
             quaternion = q;
-            quaternion.w  = sqrt(1 + obj.r11 +obj.r22 + obj.r33)/2;
-            quaternion.e1 = (obj.r32 - obj.r23)/(4*quaternion.w);
-            quaternion.e2 = (obj.r13 - obj.r31)/(4*quaternion.w);
-            quaternion.e3 = (obj.r21 - obj.r12)/(4*quaternion.w);
+            quaternion.w  = sqrt(1 + obj.body(1,1) +obj.body(2,2) + obj.body(3,3))/2;
+            quaternion.e(1) = (obj.body(3,2) - obj.body(2,3))/(4*quaternion.w);
+            quaternion.e(2) = (obj.body(1,3) - obj.body(3,1))/(4*quaternion.w);
+            quaternion.e(3) = (obj.body(2,1) - obj.body(1,2))/(4*quaternion.w);
+            
+            quat = quaternion;
         end
     end
 end
