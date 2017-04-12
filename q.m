@@ -34,6 +34,13 @@ classdef q
 
             r_out = r_matrix;
         end
+        
+        function R_q = Rodriguez(obj)
+            I = [1 0 0; 0 1 0; 0 0 1];
+            S_e = [ 0 -obj1.e(3) obj1.e(2); obj1.e(3) 0 -obj1.e(1); -obj1.e(2) obj1.e(1) 0];
+            
+            R_q = I + 2*obj.w*S_e + 2*S_e^2;
+        end
     end
     
 end
